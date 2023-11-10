@@ -1,35 +1,36 @@
-module VGA(input clk, input rst, output reg VGA_HS, output reg VGA_VS, output reg [7:0]VGAR, output reg [7:0]VGAG, output reg [7:0]VGAB);
-// Create FSM to control VGA states. Parameters Credit to V. Hunter Adams
+module VGA(input clk, input rst, output reg VGA_HS, output reg VGA_VS, output reg [7:0]VGAR, output reg [7:0]VGAG, output reg [7:0]VGAB, output reg Sync, output reg VGA_CLK);
+// Create FSM to control VGA states. Credit to V. Hunter Adams
     // Horizontal parameters (measured in clock cycles)
-    parameter [9:0] H_ACTIVE  =  10'd_639 ;
-    parameter [9:0] H_FRONT   =  10'd_15 ;
-    parameter [9:0] H_PULSE   =  10'd_95 ;
-    parameter [9:0] H_BACK    =  10'd_47 ;
+    parameter [9:0] H_ACTIVE  =  10'd639;
+    parameter [9:0] H_FRONT   =  10'd15;
+    parameter [9:0] H_PULSE   =  10'd95;
+    parameter [9:0] H_BACK    =  10'd47;
 
     // Vertical parameters (measured in lines)
-    parameter [9:0] V_ACTIVE   =  10'd_479 ;
-    parameter [9:0] V_FRONT    =  10'd_9 ;
-    parameter [9:0] V_PULSE =  10'd_1 ;
-    parameter [9:0] V_BACK  =  10'd_32 ;
+    parameter [9:0] V_ACTIVE   =  10'd479;
+    parameter [9:0] V_FRONT    =  10'd9;
+    parameter [9:0] V_PULSE =  10'd1;
+    parameter [9:0] V_BACK  =  10'd32;
 
     // Parameters for readability
-    parameter   LOW     = 1'b_0 ;
-    parameter   HIGH    = 1'b_1 ;
+    parameter   LOW     = 1'b0;
+    parameter   HIGH    = 1'b1;
 
     // States (more readable)
-    parameter   [7:0]   H_ACTIVE_STATE    = 8'd_0;
-    parameter   [7:0]   H_FRONT_STATE     = 8'd_1;
-    parameter   [7:0]   H_PULSE_STATE   = 8'd_2;
-    parameter   [7:0]   H_BACK_STATE     = 8'd_3;
+    parameter   [7:0]   H_ACTIVE_STATE    = 8'd0;
+    parameter   [7:0]   H_FRONT_STATE     = 8'd1;
+    parameter   [7:0]   H_PULSE_STATE   = 8'd2;
+    parameter   [7:0]   H_BACK_STATE     = 8'd3;
 
-    parameter   [7:0]   V_ACTIVE_STATE    = 8'd_0 ;
-    parameter   [7:0]   V_FRONT_STATE    = 8'd_1 ;
-    parameter   [7:0]   V_PULSE_STATE   = 8'd_2 ;
-    parameter   [7:0]   V_BACK_STATE     = 8'd_3 ;
+/*  parameter   [7:0]   V_ACTIVE_STATE    = 8'd0;
+    parameter   [7:0]   V_FRONT_STATE    = 8'd1;
+    parameter   [7:0]   V_PULSE_STATE   = 8'd2;
+    parameter   [7:0]   V_BACK_STATE     = 8'd3;
+*/
 
     // Declare State Variables
-    reg [3:0]S;
-    reg [3:0]NS;
+    reg [7:0]S;
+    reg [7:0]NS;
 
     // Initialization Always Block
     always@(posedge clk or negedge rst)
@@ -47,43 +48,36 @@ module VGA(input clk, input rst, output reg VGA_HS, output reg VGA_VS, output re
     // NS Always Block
     always@(*)
     begin
+        Sync = 1'b0;
+        VGA_CLK = clk;
         case(S)
             H_ACTIVE_STATE:
             begin
-                if (counterHActive < H_ACTIVE)
-                    NS <= H_ACTIVE_STATE;
+                if (counterHActive <= H_ACTIVE)
+                    NS = H_ACTIVE_STATE;
                 else
-                    NS <= H_FRONT_STATE;
+                    NS = H_FRONT_STATE;
             end
             H_FRONT_STATE: 
             begin
-                if (counterHFront < H_FRONT)
-                    NS <= H_FRONT_STATE;
+                if (counterHFront <= H_FRONT)
+                    NS = H_FRONT_STATE;
                 else
-                    NS <= H_PULSE_STATE;
+                    NS = H_PULSE_STATE;
             end
             H_PULSE_STATE: 
             begin
-                if (counterHPulse < H_PULSE)
-                    NS <= H_PULSE_STATE;
+                if (counterHPulse <= H_PULSE)
+                    NS = H_PULSE_STATE;
                 else
-                    NS <= H_BACK_STATE;
+                    NS = H_BACK_STATE;
             end
             H_BACK_STATE:
             begin
-                if (counterHBack < H_BACK)
-                    NS <= H_BACK_STATE;
+                if (counterHBack <= H_BACK)
+                    NS = H_BACK_STATE;
                 else
-                begin
-                    if (counterVActive < V_ACTIVE)
-                    begin
-                        NS <= H_ACTIVE_STATE;
-                    end
-                    else
-                    begin
-                        NS <= V_FRONT_STATE;
-                    end
-                end
+                    NS = H_ACTIVE_STATE;
             end
         endcase
     end
