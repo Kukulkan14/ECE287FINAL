@@ -1,4 +1,4 @@
-vga_frame vga_frame_inst (
+vga_frame	vga_frame_inst (
 	.address ( address_sig ),
 	.clock ( clock_sig ),
 	.data ( data_sig ),

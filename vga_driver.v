@@ -21,7 +21,8 @@ output reg vsync, // vertical sync
 output reg active_pixels, // is on when we're in the active draw space
 output reg frame_done, // is on when we're done writing 640*480
 
-output reg [9:0]xPixel, // current x
+// NOTE x and y that are passed out go greater than 640 for x and 480 for y as those signals need to be sent for hsync and vsync
+output reg [9:0]xPixel, // current x 
 output reg [9:0]yPixel, // current y - 10 bits = 1024 ... a little bit more than we need
 
 output reg VGA_BLANK_N,	//	VGA BLANK = !BLANK Composite Blank Control Input (TTL Compatible). A Logic 0 on this control input drives the analog outputs, IOR, IOB, and IOG, to  the blanking level.  The  BLANK  signal is latched on the rising edge  of CLOCK.  While BLANK  is a Logic 0, the R0 to  R9, G0  to  G9, and B0 to  B9 pixel inputs are  ignored. 
@@ -49,7 +50,8 @@ begin
 	hsync = ~((xPixel >= HS_STA) && (xPixel < HS_END));
 	vsync = ~((yPixel >= VS_STA) && (yPixel < VS_END));
 	active_pixels = (xPixel <= HA_END && yPixel <= VA_END);
-	frame_done = (xPixel >= HA_END && yPixel >= VA_END);
+	//frame_done = (xPixel >= HA_END && yPixel >= VA_END);
+	frame_done = (yPixel >= VA_END);
 	
 	VGA_BLANK_N = active_pixels;
 	VGA_SYNC_N = 1'b1;
