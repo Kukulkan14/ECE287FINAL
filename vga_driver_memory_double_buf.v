@@ -225,12 +225,12 @@ always @(*)
 				NS = RFM_INIT_START;
 			else
             begin
-                if (character_done == 1'b1)
-                NS = RFM_CHAR_WAIT;
-                else
+                //if (character_done == 1'b1)
+                //NS = RFM_CHAR_WAIT;
+                //else
                 NS = RFM_DRAWING;
             end
-        RFM_CHAR_WAIT: NS = RFM_DRAWING;
+        //RFM_CHAR_WAIT: NS = RFM_DRAWING;
 		default:	NS = ERROR;
 	endcase
 
@@ -263,7 +263,7 @@ begin
 	if (rst == 1'b0)
 	begin
         readCounterOverall <= 16'd0;
-        readLineCounter <= 1'b0;
+        readLineCounter <= 8'b0;
         readCounter <= 8'd0;
 		write_buf_mem_address <= 14'd0;
 		write_buf_mem_data <= 24'd0;
@@ -284,7 +284,7 @@ begin
 			START:
 			begin
                 readCounterOverall <= 16'd0;
-                readLineCounter <= 1'b0;
+                readLineCounter <= 8'b0;
                 readCounter <= 8'd0;
 				write_buf_mem_address <= 14'd0;
 				write_buf_mem_data <= 24'd0;
@@ -340,7 +340,7 @@ begin
 					wr_id <= MEM_M0_READ_M1_WRITE;
 
 
-                if (y < VGA_HEIGHT-1 && x < VGA_WIDTH-1)
+                if (y < VGA_HEIGHT && x < VGA_WIDTH)
                 begin
                 case(readCounter)
                     8'd0: readCounter <= readCounter + 1'b1;
@@ -351,9 +351,27 @@ begin
                     end
                     8'd2:
                     begin
+                        readCounter <= readCounter + 1'b1;
+                    end
+                    8'd3:
+                    begin
+                        readCounterOverall <= readCounterOverall + 1'b1;
+                        readCounter <= readCounter + 1'b1;
+                    end
+                    8'd4: 
+                    begin
+                        readCounter <= readCounter + 1'b1;
+                    end
+                    8'd5:
+                    begin
+                        readCounterOverall <= readCounterOverall + 1'b1;
+                        readCounter <= readCounter + 1'b1;
+                    end
+                    8'd6:
+                    begin
                         if ((readCounterOverall == 16'd639))
                                 begin
-                                    if (readLineCounter == 1'b1)
+                                    if (readLineCounter >= 8'd3)
                                     begin
                                         if (read_buf_mem_address == 24'd19199)
                                         begin
@@ -378,21 +396,21 @@ begin
                                     readCounter <= readCounter + 1'b1;
                                 end
                     end
-                    8'd3:
+                    8'd7:
                     begin
                         if ((readCounterOverall == 16'd639))
                         begin
-                            if (readLineCounter == 1'b1)
+                            if (readLineCounter >= 8'd3)
                             begin
                                 readCounterOverall <= 16'd0;
                                 readCounter <= 8'd0;
-                                readLineCounter <= 1'b0;
+                                readLineCounter <= 8'd0;
                             end
                             else
                             begin
                                 readCounterOverall <= 16'd0;
                                 readCounter <= 8'd0;
-                                readLineCounter <= 1'b1;                                
+                                readLineCounter <= readLineCounter + 1'b1;                                
                             end
                         end
                         else
@@ -407,7 +425,6 @@ begin
             begin
                 readCounterOverall <= 16'd0;
                 readCounter <= 8'd0;
-                read_buf_mem_address <= 24'd0;
             end
 
 
@@ -491,7 +508,7 @@ begin
 			RFM_INIT_WAIT:
 			begin
 
-                if (y < VGA_HEIGHT-1 && x < VGA_WIDTH-1)
+                if (y < VGA_HEIGHT && x < VGA_WIDTH)
                 begin
                 case(readCounter)
                     8'd0: readCounter <= readCounter + 1'b1;
@@ -502,9 +519,27 @@ begin
                     end
                     8'd2:
                     begin
+                        readCounter <= readCounter + 1'b1;
+                    end
+                    8'd3:
+                    begin
+                        readCounterOverall <= readCounterOverall + 1'b1;
+                        readCounter <= readCounter + 1'b1;
+                    end
+                    8'd4: 
+                    begin
+                        readCounter <= readCounter + 1'b1;
+                    end
+                    8'd5:
+                    begin
+                        readCounterOverall <= readCounterOverall + 1'b1;
+                        readCounter <= readCounter + 1'b1;
+                    end
+                    8'd6:
+                    begin
                         if ((readCounterOverall == 16'd639))
                                 begin
-                                    if (readLineCounter == 1'b1)
+                                    if (readLineCounter >= 8'd3)
                                     begin
                                         if (read_buf_mem_address == 24'd19199)
                                         begin
@@ -529,21 +564,21 @@ begin
                                     readCounter <= readCounter + 1'b1;
                                 end
                     end
-                    8'd3:
+                    8'd7:
                     begin
                         if ((readCounterOverall == 16'd639))
                         begin
-                            if (readLineCounter == 1'b1)
+                            if (readLineCounter >= 8'd3)
                             begin
                                 readCounterOverall <= 16'd0;
                                 readCounter <= 8'd0;
-                                readLineCounter <= 1'b0;
+                                readLineCounter <= 8'd0;
                             end
                             else
                             begin
                                 readCounterOverall <= 16'd0;
                                 readCounter <= 8'd0;
-                                readLineCounter <= 1'b1;                                
+                                readLineCounter <= readLineCounter + 1'b1;                                
                             end
                         end
                         else
@@ -558,10 +593,7 @@ begin
             begin
                 readCounterOverall <= 16'd0;
                 readCounter <= 8'd0;
-                read_buf_mem_address <= 24'd0;
             end
-
-
 				// if ((y < VGA_HEIGHT-1 && x < VGA_WIDTH-1) | (x == 10'd799)) // or use the active_pixels signal
                 // begin
                 //     if (readCounter == 8'd3)
@@ -637,7 +669,7 @@ begin
 			RFM_DRAWING:
 			begin		
 
-                if (y < VGA_HEIGHT-1 && x < VGA_WIDTH-1)
+                if (y < VGA_HEIGHT && x < VGA_WIDTH)
                 begin
                 case(readCounter)
                     8'd0: readCounter <= readCounter + 1'b1;
@@ -648,9 +680,27 @@ begin
                     end
                     8'd2:
                     begin
+                        readCounter <= readCounter + 1'b1;
+                    end
+                    8'd3:
+                    begin
+                        readCounterOverall <= readCounterOverall + 1'b1;
+                        readCounter <= readCounter + 1'b1;
+                    end
+                    8'd4: 
+                    begin
+                        readCounter <= readCounter + 1'b1;
+                    end
+                    8'd5:
+                    begin
+                        readCounterOverall <= readCounterOverall + 1'b1;
+                        readCounter <= readCounter + 1'b1;
+                    end
+                    8'd6:
+                    begin
                         if ((readCounterOverall == 16'd639))
                                 begin
-                                    if (readLineCounter == 1'b1)
+                                    if (readLineCounter >= 8'd3)
                                     begin
                                         if (read_buf_mem_address == 24'd19199)
                                         begin
@@ -671,25 +721,25 @@ begin
                                 end
                                 else
                                 begin
-                                    readCounter <= readCounter + 1'b1;
                                     read_buf_mem_address <= read_buf_mem_address + 1'b1;
+                                    readCounter <= readCounter + 1'b1;
                                 end
                     end
-                    8'd3:
+                    8'd7:
                     begin
                         if ((readCounterOverall == 16'd639))
                         begin
-                            if (readLineCounter == 1'b1)
+                            if (readLineCounter >= 8'd3)
                             begin
                                 readCounterOverall <= 16'd0;
                                 readCounter <= 8'd0;
-                                readLineCounter <= 1'b0;
+                                readLineCounter <= 8'd0;
                             end
                             else
                             begin
                                 readCounterOverall <= 16'd0;
                                 readCounter <= 8'd0;
-                                readLineCounter <= 1'b1;                                
+                                readLineCounter <= readLineCounter + 1'b1;                                
                             end
                         end
                         else
@@ -704,7 +754,6 @@ begin
             begin
                 readCounterOverall <= 16'd0;
                 readCounter <= 8'd0;
-                read_buf_mem_address <= 24'd0;
             end
 
 				// if (y < VGA_HEIGHT-1 && x < VGA_WIDTH-1)
@@ -772,7 +821,6 @@ begin
                                 
                                 counterLines <= 8'd0;
                                 counterPixels <= 8'd0;
-                                character_done <= 1'b1;
                                 if(write_buf_mem_address == 15'd19199)
                                 begin
                                     write_buf_mem_wren = 1'b0;
@@ -788,7 +836,6 @@ begin
                                 counterLines <= 8'd0;
                                 counterPixels <= 8'd0;
                                 write_buf_mem_address <= write_buf_mem_address - 15'd1439;
-                                character_done <= 1'b1;
                                 character_count <= character_count + 1'd1;
                             end
                         end
@@ -803,178 +850,193 @@ begin
                     end
                     else
                     begin
-                        write_buf_mem_address <= write_buf_mem_address + 1'b1;
-                        counterPixels <= counterPixels + 1'b1;
-                        
+                        if (counterPixels == 8'd7)
+                        begin
+                            if (counterLines == 8'd9)
+                            begin
+                            character_done <= 1'b1;
+                            write_buf_mem_address <= write_buf_mem_address + 1'b1;
+                            counterPixels <= counterPixels + 1'b1;
+                            end
+                            else
+                            begin
+                                write_buf_mem_address <= write_buf_mem_address + 1'b1;
+                                counterPixels <= counterPixels + 1'b1;
+                            end
+                        end
+                        else
+                        begin
+                            write_buf_mem_address <= write_buf_mem_address + 1'b1;
+                            counterPixels <= counterPixels + 1'b1;
+                        end
                     end
 
                     if(character_done == 1'b0)
                     begin
                         if ((current_character & 100'd1) == 100'd1)
                         begin
-                            write_buf_mem_data <= {8'hFF, 8'hFF, 8'hFF};
-                            
+                            write_buf_mem_data <= {8'hFF, 8'hFF, 8'hFF}; 
+                            current_character <= {1'b0, current_character[99:1]};
                         end
                         else
                         begin
-                            write_buf_mem_data <= {8'h00, 8'h00, 8'h00}; // nice blue
-                            
+                            write_buf_mem_data <= {8'h66, 8'h77, 8'h22};
+                            current_character <= {1'b0, current_character[99:1]}; // nice blue        
                         end
                     end
-                    
-                    
+                    else
+                    begin
+                        current_character <= 100'b1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110;
+                        character_done <= 1'b0;
+                    end
 					// write_buf_mem_address <= (SW[13:7]) * VIRTUAL_PIXEL_HEIGHT + (SW[6:0]);
 					// write_buf_mem_data <= {SW[16]*8'hFF, SW[15]*8'hFF, SW[14]*8'hFF};
-                    current_character <= {1'b0, current_character[99:1]};
 				end
 				else
 					write_buf_mem_wren <= 1'b0;
 			end	
-            RFM_CHAR_WAIT:
-            begin
-                if (y < VGA_HEIGHT-1 && x < VGA_WIDTH-1)
-                begin
-                case(readCounter)
-                    8'd0: readCounter <= readCounter + 1'b1;
-                    8'd1: 
-                    begin
-                        readCounterOverall <= readCounterOverall + 1'b1;
-                        readCounter <= readCounter + 1'b1;
-                    end
-                    8'd2:
-                    begin
-                        if ((readCounterOverall == 16'd639))
-                                begin
-                                    if (readLineCounter == 1'b1)
-                                    begin
-                                        if (read_buf_mem_address == 24'd19199)
-                                        begin
-                                            read_buf_mem_address <= 24'd0;
-                                            readCounter <= readCounter + 1'b1;
-                                        end
-                                        else
-                                        begin
-                                            readCounter <= readCounter + 1'b1;
-                                            read_buf_mem_address <= read_buf_mem_address + 1'b1;
-                                        end
-                                    end
-                                    else
-                                    begin
-                                        readCounter <= readCounter + 1'b1;
-                                        read_buf_mem_address <= read_buf_mem_address - 24'd159;                             
-                                    end
-                                end
-                                else
-                                begin
-                                    readCounter <= readCounter + 1'b1;
-                                    read_buf_mem_address <= read_buf_mem_address + 1'b1;
-                                end
-                    end
-                    8'd3:
-                    begin
-                        if ((readCounterOverall == 16'd639))
-                        begin
-                            if (readLineCounter == 1'b1)
-                            begin
-                                readCounterOverall <= 16'd0;
-                                readCounter <= 8'd0;
-                                readLineCounter <= 1'b0;
-                            end
-                            else
-                            begin
-                                readCounterOverall <= 16'd0;
-                                readCounter <= 8'd0;
-                                readLineCounter <= 1'b1;                                
-                            end
-                        end
-                        else
-                        begin
-                            readCounter <= 8'd0;
-                            readCounterOverall <= readCounterOverall + 1'b1;
-                        end
-                    end
-                endcase
-            end
-            else
-            begin
-                readCounterOverall <= 16'd0;
-                readCounter <= 8'd0;
-                read_buf_mem_address <= 24'd0;
-            end
+    //         RFM_CHAR_WAIT:
+    //         begin
+    //             if (y < VGA_HEIGHT-1 && x < VGA_WIDTH-1)
+    //             begin
+    //             case(readCounter)
+    //                 8'd0: readCounter <= readCounter + 1'b1;
+    //                 8'd1: 
+    //                 begin
+    //                     readCounterOverall <= readCounterOverall + 1'b1;
+    //                     readCounter <= readCounter + 1'b1;
+    //                 end
+    //                 8'd2:
+    //                 begin
+    //                     if ((readCounterOverall == 16'd639))
+    //                             begin
+    //                                 if (readLineCounter == 1'b1)
+    //                                 begin
+    //                                     if (read_buf_mem_address == 24'd19199)
+    //                                     begin
+    //                                         read_buf_mem_address <= 24'd0;
+    //                                         readCounter <= readCounter + 1'b1;
+    //                                     end
+    //                                     else
+    //                                     begin
+    //                                         readCounter <= readCounter + 1'b1;
+    //                                         read_buf_mem_address <= read_buf_mem_address + 1'b1;
+    //                                     end
+    //                                 end
+    //                                 else
+    //                                 begin
+    //                                     readCounter <= readCounter + 1'b1;
+    //                                     read_buf_mem_address <= read_buf_mem_address - 24'd159;                             
+    //                                 end
+    //                             end
+    //                             else
+    //                             begin
+    //                                 readCounter <= readCounter + 1'b1;
+    //                                 read_buf_mem_address <= read_buf_mem_address + 1'b1;
+    //                             end
+    //                 end
+    //                 8'd3:
+    //                 begin
+    //                     if ((readCounterOverall == 16'd639))
+    //                     begin
+    //                         if (readLineCounter == 1'b1)
+    //                         begin
+    //                             readCounterOverall <= 16'd0;
+    //                             readCounter <= 8'd0;
+    //                             readLineCounter <= 1'b0;
+    //                         end
+    //                         else
+    //                         begin
+    //                             readCounterOverall <= 16'd0;
+    //                             readCounter <= 8'd0;
+    //                             readLineCounter <= 1'b1;                                
+    //                         end
+    //                     end
+    //                     else
+    //                     begin
+    //                         readCounter <= 8'd0;
+    //                         readCounterOverall <= readCounterOverall + 1'b1;
+    //                     end
+    //                 end
+    //             endcase
+    //         end
+    //         else
+    //         begin
+    //             readCounterOverall <= 16'd0;
+    //             readCounter <= 8'd0;
+    //             read_buf_mem_address <= 24'd0;
+    //         end
 
-                // if (y < VGA_HEIGHT-1 && x < VGA_WIDTH-1)
-				// 	read_buf_mem_address <= read_buf_mem_address + 1'b1;
+    //             // if (y < VGA_HEIGHT-1 && x < VGA_WIDTH-1)
+	// 			// 	read_buf_mem_address <= read_buf_mem_address + 1'b1;
 
-            //    if ((y < VGA_HEIGHT-1 && x < VGA_WIDTH-1) | (x == 10'd799)) // or use the active_pixels signal
-            //     begin
-            //         if (readCounter == 8'd3)
-            //         begin
-            //             if ((readCounterOverall == 16'd639))
-            //             begin
-            //                 if (readLineCounter == 1'b1)
-            //                 begin
-            //                     read_buf_mem_address <= read_buf_mem_address + 1'b1;
-            //                     readCounter <= 8'd0;
-            //                     readLineCounter <= 1'b0;
-            //                     readCounterOverall <= 16'd0;
-            //                     if (read_buf_mem_address == 24'd19199)
-            //                     begin
-			// 		                read_buf_mem_address <= 24'd0;
-            //                     end
-            //                 end
-            //                 else
-            //                 begin
-            //                     read_buf_mem_address <= read_buf_mem_address - 24'd159;
-            //                     readCounter <= 8'd0;
-            //                     readLineCounter <= 1'b1;  
-            //                     readCounterOverall <= 16'd0;                              
-            //                 end
+    //         //    if ((y < VGA_HEIGHT-1 && x < VGA_WIDTH-1) | (x == 10'd799)) // or use the active_pixels signal
+    //         //     begin
+    //         //         if (readCounter == 8'd3)
+    //         //         begin
+    //         //             if ((readCounterOverall == 16'd639))
+    //         //             begin
+    //         //                 if (readLineCounter == 1'b1)
+    //         //                 begin
+    //         //                     read_buf_mem_address <= read_buf_mem_address + 1'b1;
+    //         //                     readCounter <= 8'd0;
+    //         //                     readLineCounter <= 1'b0;
+    //         //                     readCounterOverall <= 16'd0;
+    //         //                     if (read_buf_mem_address == 24'd19199)
+    //         //                     begin
+	// 		// 		                read_buf_mem_address <= 24'd0;
+    //         //                     end
+    //         //                 end
+    //         //                 else
+    //         //                 begin
+    //         //                     read_buf_mem_address <= read_buf_mem_address - 24'd159;
+    //         //                     readCounter <= 8'd0;
+    //         //                     readLineCounter <= 1'b1;  
+    //         //                     readCounterOverall <= 16'd0;                              
+    //         //                 end
                             
-            //             end
-            //             else
-            //             begin
+    //         //             end
+    //         //             else
+    //         //             begin
                             
-            //                 readCounter <= 8'd0;
-            //             end
-            //             readCounterOverall <= readCounterOverall + 1'b1;
-            //         end
-            //         else
-            //         begin
-            //             if (readCounter == 8'd1)
-            //             begin
-            //                 readCounterOverall <= readCounterOverall + 1'b1;
-            //                 readCounter <= readCounter + 1'b1;
-            //             end
-            //             else
-            //             begin
-            //                 if (readCounter == 8'd2)
-            //                 begin
-            //                     read_buf_mem_address <= read_buf_mem_address + 1'b1;
-            //                 end
-            //                 readCounter <= readCounter + 1'b1;
-            //             end
-            //         end
-            //     end
+    //         //                 readCounter <= 8'd0;
+    //         //             end
+    //         //             readCounterOverall <= readCounterOverall + 1'b1;
+    //         //         end
+    //         //         else
+    //         //         begin
+    //         //             if (readCounter == 8'd1)
+    //         //             begin
+    //         //                 readCounterOverall <= readCounterOverall + 1'b1;
+    //         //                 readCounter <= readCounter + 1'b1;
+    //         //             end
+    //         //             else
+    //         //             begin
+    //         //                 if (readCounter == 8'd2)
+    //         //                 begin
+    //         //                     read_buf_mem_address <= read_buf_mem_address + 1'b1;
+    //         //                 end
+    //         //                 readCounter <= readCounter + 1'b1;
+    //         //             end
+    //         //         end
+    //         //     end
 
 
 
 
 
-                    if(character_done == 1'b1)
-                    begin
-                        //character_buf_mem_address <= character_buf_mem_address + 1'b1;
-						current_character <= 100'b1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110;
-                        character_done <= 1'b0;
-                    end
-            end
-		endcase
+    //                     //character_buf_mem_address <= character_buf_mem_address + 1'b1;
+	// 					current_character <= 100'b1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110;
+    //                     character_done <= 1'b0;
+    //         end
+    	endcase
 	end
 end
 
 
 reg [7:0] readCounter;
 reg [99:0] current_character;
-reg readLineCounter;
+reg [7:0] readLineCounter;
 reg [15:0] readCounterOverall;
 
 reg character_done;
