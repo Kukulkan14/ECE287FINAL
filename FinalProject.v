@@ -252,5 +252,5 @@ module FinalProject(// Clock Inputs
   assign UART_CTS   = 1'b0;
 // DONE STANDARD PORT DECLARATION ABOVE
 
-    vga_driver_memory_double_buf doathing(CLOCK_50, CLOCK2_50, CLOCK3_50, SMA_CLKOUT, SMA_CLKIN, KEY, SW, VGA_CLK, VGA_HS, VGA_VS, VGA_BLANK_N, VGA_SYNC_N, VGA_R, VGA_G, VGA_B);
+    vga_driver_memory_double_buf vga_output(CLOCK_50, CLOCK2_50, CLOCK3_50, SMA_CLKOUT, SMA_CLKIN, KEY, SW, VGA_CLK, VGA_HS, VGA_VS, VGA_BLANK_N, VGA_SYNC_N, VGA_R, VGA_G, VGA_B);
 endmodule

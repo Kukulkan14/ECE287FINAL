@@ -262,6 +262,7 @@ always @(posedge clk or negedge rst)
 begin
 	if (rst == 1'b0)
 	begin
+        read_buf_mem_address <= 24'd0;
         readCounterOverall <= 16'd0;
         readLineCounter <= 8'b0;
         readCounter <= 8'd0;
@@ -283,6 +284,7 @@ begin
 		case (S)
 			START:
 			begin
+                read_buf_mem_address <= 24'd0;
                 readCounterOverall <= 16'd0;
                 readLineCounter <= 8'b0;
                 readCounter <= 8'd0;
@@ -298,7 +300,7 @@ begin
                 character_row_count <= 8'd0;
                 character_count <= 8'd0;
                 character_buf_mem_wren <= 1'b0;
-                current_character <= 100'b1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110;
+                current_character <= 100'b1010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010;
 			end
 			W2M_INIT:
 			begin
@@ -317,27 +319,34 @@ begin
 				/* INITIALIZE to a solid color - IF SW[16-14] all off then = BLACK...all on = WHITE */
 				write_buf_mem_data <= {SW[16]*8'hFF, SW[15]*8'hFF, SW[14]*8'hFF}; // red, blue, and green done in the combinational part below	
 			end
-			W2M_DONE: write_buf_mem_wren <= 1'd0; // turn off writing to memory
+			W2M_DONE:
+            begin
+                write_buf_mem_wren <= 1'd0; // turn off writing to memory
+                read_buf_mem_address <= 24'd0;
+            end
 			RFM_INIT_START: 
 			begin
                 //readCounter <= 8'd0;
                 //read_buf_mem_address <= 24'd0;
                 write_buf_mem_address <= 14'd0;
-                write_buf_mem_wren <= 1'd0;
+                write_buf_mem_wren <= 1'd1;
                 counterLines <= 8'd0;
                 counterPixels <= 8'd0;
                 character_count <= 8'd0;
                 character_done <= 1'b0;
                 character_buf_mem_address <= 15'd0;
-                current_character <= 100'b1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110;
+                current_character <= 100'b1010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010;
 				
-				/* swap the buffers after each frame...the double buffer */
-				if (wr_id == MEM_INIT_WRITE)
-					wr_id <= MEM_M0_READ_M1_WRITE;
-				else if (wr_id == MEM_M0_READ_M1_WRITE)
-					wr_id <= MEM_M0_WRITE_M1_READ;
-				else
-					wr_id <= MEM_M0_READ_M1_WRITE;
+				
+
+                /* swap the buffers after each frame...the double buffer */
+                if (wr_id == MEM_INIT_WRITE)
+                    wr_id <= MEM_M0_READ_M1_WRITE;
+                else if (wr_id == MEM_M0_READ_M1_WRITE)
+                    wr_id <= MEM_M0_WRITE_M1_READ;
+                else
+                    wr_id <= MEM_M0_READ_M1_WRITE;
+
 
 
                 if (y < VGA_HEIGHT && x < VGA_WIDTH)
@@ -507,7 +516,12 @@ begin
 			end
 			RFM_INIT_WAIT:
 			begin
-
+                write_buf_mem_address <= 14'd0;
+                counterLines <= 8'd0;
+                counterPixels <= 8'd0;
+                character_count <= 8'd0;
+                character_done <= 1'b0;
+                character_buf_mem_address <= 15'd0;
                 if (y < VGA_HEIGHT && x < VGA_WIDTH)
                 begin
                 case(readCounter)
@@ -654,14 +668,25 @@ begin
                 //     end
                 // end
 
-                    write_buf_mem_address <= 14'd0;
-                    write_buf_mem_wren <= 1'b1;
-                    counterLines <= 8'd0;
-                    counterPixels <= 8'd0;
-                    character_count <= 8'd0;
-                    character_done <= 1'b0;
-                    character_buf_mem_address <= 15'd0;
-                    current_character <= 100'b1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110;
+                    
+                    if(character_done == 1'b0)
+                    begin
+                        if ((current_character & 100'd1) == 100'd1)
+                        begin
+                            write_buf_mem_data <= {8'hFF, 8'hFF, 8'hFF}; 
+                            current_character <= {1'b0, current_character[99:1]};
+                            write_buf_mem_address <= write_buf_mem_address + 1'b1;
+                            counterPixels <= counterPixels + 1'b1;
+                        end
+                        else
+                        begin
+                            write_buf_mem_data <= {8'h77, 8'h77, 8'h22};
+                            current_character <= {1'b0, current_character[99:1]};  
+                            write_buf_mem_address <= write_buf_mem_address + 1'b1;
+                            counterPixels <= counterPixels + 1'b1;
+                                  
+                        end
+                    end
 
                     
 
@@ -818,7 +843,6 @@ begin
                             if (character_count == 8'd15)
                             begin
                                 character_count <= 8'd0;
-                                
                                 counterLines <= 8'd0;
                                 counterPixels <= 8'd0;
                                 if(write_buf_mem_address == 15'd19199)
@@ -880,14 +904,25 @@ begin
                         end
                         else
                         begin
-                            write_buf_mem_data <= {8'h66, 8'h77, 8'h22};
-                            current_character <= {1'b0, current_character[99:1]}; // nice blue        
+                            write_buf_mem_data <= {8'h77, 8'h77, 8'h22};
+                            current_character <= {1'b0, current_character[99:1]};        
                         end
                     end
                     else
                     begin
-                        current_character <= 100'b1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110;
-                        character_done <= 1'b0;
+                        
+                        if ((current_character & 100'd1) == 100'd1)
+                        begin
+                            write_buf_mem_data <= {8'hFF, 8'hFF, 8'hFF}; 
+                            current_character <= 100'b1010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010;
+                            character_done <= 1'b0;
+                        end
+                        else
+                        begin
+                            write_buf_mem_data <= {8'h77, 8'h77, 8'h22};  
+                            current_character <= 100'b1010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010;
+                            character_done <= 1'b0;      
+                        end
                     end
 					// write_buf_mem_address <= (SW[13:7]) * VIRTUAL_PIXEL_HEIGHT + (SW[6:0]);
 					// write_buf_mem_data <= {SW[16]*8'hFF, SW[15]*8'hFF, SW[14]*8'hFF};
@@ -1053,7 +1088,7 @@ reg frame_buf_mem_wren0;
 wire [23:0]frame_buf_mem_q0;
 
 
-reg [14:0] character_buf_mem_address;
+reg [6:0] character_buf_mem_address;
 reg [143:0] character_buf_mem_data;
 reg character_buf_mem_wren;
 wire [143:0]character_buf_mem_q;
