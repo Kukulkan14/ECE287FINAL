@@ -1,7 +1,7 @@
 module debounce_switches(
 input clk,
 input rst,
-input [17:0]SW, 
+input [16:0]SW, 
 output [17:0]SW_db
 );
 
@@ -22,7 +22,7 @@ debounce db15(clk, rst, SW[13], SW_db[13]);
 debounce db16(clk, rst, SW[14], SW_db[14]);
 debounce db17(clk, rst, SW[15], SW_db[15]);
 debounce db18(clk, rst, SW[16], SW_db[16]);
-debounce db19(clk, rst, SW[17], SW_db[17]);
+//debounce db19(clk, rst, SW[17], SW_db[17]);
 
 endmodule
 
