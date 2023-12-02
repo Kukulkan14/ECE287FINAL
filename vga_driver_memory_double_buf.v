@@ -700,7 +700,7 @@ begin
                         end
                         else
                         begin
-                            write_buf_mem_data <= {8'h77, 8'h77, 8'h22};
+                            write_buf_mem_data <= {8'h00, 8'hC7, 8'hFF};
                             current_character <= {1'b0, current_character[99:1]};  
                             write_buf_mem_address <= 14'd1;
                             counterPixels <= 8'd1;
@@ -931,7 +931,7 @@ begin
                         end
                         else
                         begin
-                            write_buf_mem_data <= {8'h77, 8'h77, 8'h22};
+                            write_buf_mem_data <= {8'h00, 8'hC7, 8'hFF};
                             current_character <= {1'b0, current_character[99:1]};        
                         end
                     end
@@ -953,7 +953,7 @@ begin
                         end
                         else
                         begin
-                            write_buf_mem_data <= {8'h77, 8'h77, 8'h22};  
+                            write_buf_mem_data <= {8'h00, 8'hC7, 8'hFF};  
                             current_character <= character_buf_mem_q;
                             character_done <= 1'b0; 
                             character_buf_mem_address <= frame[1343:1337];
