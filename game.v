@@ -229,14 +229,13 @@ begin
 						  end
 						  EXAM:
 						  begin
-								if (selection == 8'd1)
-									NS = NOW;
-								if (selection == 8'd2)
-									NS = TWO_DAYS;
-								if (selection == 8'd3)
-									NS = NEVER;
-								if (selection == 8'd4)
-									NS = EXAM;
+								case(selection)
+                                    8'd1: NS = NOW;
+                                    8'd2: NS = TWO_DAYS;
+                                    8'd3: NS = NEVER;
+                                    8'd4: NS = EXAM;
+                                    default: NS = confirmInput;
+                                endcase
 						  end
 						  NOW:
 						  begin
@@ -244,36 +243,33 @@ begin
 						  end
 						  NOW_2:
 						  begin
-						      if (selection == 8'd1)
-									NS = NO_PRINT;
-								if (selection == 8'd2)
-									NS = PRINT;
-								if (selection == 8'd3)
-									NS = NO_PRINT;
-								if (selection == 8'd4)
-									NS = PRINT;
+                                case(selection)
+                                    8'd1: NS = NO_PRINT;
+                                    8'd2: NS = PRINT;
+                                    8'd3: NS = NO_PRINT;
+                                    8'd4: NS = PRINT;
+                                    default: NS = confirmInput;
+                                endcase
 						  end
 						  PRINT:
 						  begin
-						      if (selection == 8'd1)
-									NS = FOOD;
-								if (selection == 8'd2)
-									NS = NO_FOOD;
-								if (selection == 8'd3)
-									NS = FOOD;
-								if (selection == 8'd4)
-									NS = NO_FOOD;
+                                case(selection)
+                                    8'd1: NS = FOOD;
+                                    8'd2: NS = NO_FOOD;
+                                    8'd3: NS = FOOD;
+                                    8'd4: NS = NO_FOOD;
+                                    default: NS = confirmInput;
+                                endcase
 						  end
 						  FOOD:
 						  begin
-						      if (selection == 8'd1)
-									NS = SINK;
-								if (selection == 8'd2)
-									NS = PUT_OUT;
-								if (selection == 8'd3)
-									NS = SINK;
-								if (selection == 8'd4)
-									NS = PUT_OUT;
+                                case(selection)
+                                    8'd1: NS = SINK;
+                                    8'd2: NS = PUT_OUT;
+                                    8'd3: NS = SINK;
+                                    8'd4: NS = PUT_OUT;
+                                    default: NS = confirmInput;
+                                endcase
 						  end
 						  SINK:
 						  begin
@@ -285,14 +281,13 @@ begin
 						  end
 						  PUT_OUT:
 						  begin
-						      if (selection == 8'd1)
-									NS = ALT_NOW;
-								if (selection == 8'd2)
-									NS = GIVE_UP;
-								if (selection == 8'd3)
-									NS = PUT_OUT;
-								if (selection == 8'd4)
-									NS = PUT_OUT;
+                                case(selection)
+                                    8'd1: NS = ALT_NOW;
+                                    8'd2: NS = GIVE_UP;
+                                    8'd3: NS = PUT_OUT;
+                                    8'd4: NS = PUT_OUT;
+                                    default: NS = confirmInput;
+                                endcase
 						  end
 						  GIVE_UP:
 						  begin
@@ -300,25 +295,23 @@ begin
 						  end
 						  ALT_NOW:
 						  begin
-						      if (selection == 8'd1)
-									NS = PRINT;
-								if (selection == 8'd2)
-									NS = NO_PRINT;
-								if (selection == 8'd3)
-									NS = PRINT;
-								if (selection == 8'd4)
-									NS = NO_PRINT;
+                                case(selection)
+                                    8'd1: NS = PRINT;
+                                    8'd2: NS = NO_PRINT;
+                                    8'd3: NS = PRINT;
+                                    8'd4: NS = NO_PRINT;
+                                    default: NS = confirmInput;
+                                endcase
 						  end
 						  NO_PRINT:
 						  begin
-						      if (selection == 8'd1)
-									NS = DEAD;
-								if (selection == 8'd2)
-									NS = ALIVE;
-								if (selection == 8'd3)
-									NS = DEAD;
-								if (selection == 8'd4)
-									NS = ALIVE;
+                                case(selection)
+                                    8'd1: NS = DEAD;
+                                    8'd2: NS = ALIVE;
+                                    8'd3: NS = DEAD;
+                                    8'd4: NS = ALIVE;
+                                    default: NS = confirmInput;
+                                endcase
 						  end
 						  ALIVE:
 						  begin
@@ -334,47 +327,43 @@ begin
 						  end
 						  TWO_DAYS:
 						  begin
-						      if (selection == 8'd1)
-									NS = ONE_DAY;
-								if (selection == 8'd2)
-									NS = NOW;
-								if (selection == 8'd3)
-									NS = TWO_DAYS;
-								if (selection == 8'd4)
-									NS = TWO_DAYS;
+                                case(selection)
+                                    8'd1: NS = ONE_DAY;
+                                    8'd2: NS = NOW;
+                                    8'd3: NS = TWO_DAYS;
+                                    8'd4: NS = TWO_DAYS;
+                                    default: NS = confirmInput;
+                                endcase
 						  end
 						  ONE_DAY:
 						  begin
-						      if (selection == 8'd1)
-									NS = ZERO_DAYS;
-								if (selection == 8'd2)
-									NS = NOW;
-								if (selection == 8'd3)
-									NS = ONE_DAY;
-								if (selection == 8'd4)
-									NS = ONE_DAY;
+                                case(selection)
+                                    8'd1: NS = ZERO_DAYS;
+                                    8'd2: NS = NOW;
+                                    8'd3: NS = ONE_DAY;
+                                    8'd4: NS = ONE_DAY;
+                                    default: NS = confirmInput;
+                                endcase
 						  end
 						  ZERO_DAYS:
 						  begin
-						      if (selection == 8'd1)
-									NS = GAMER;
-								if (selection == 8'd2)
-									NS = PRESSURE;
-								if (selection == 8'd3)
-									NS = ZERO_DAYS;
-								if (selection == 8'd4)
-									NS = ZERO_DAYS;
+                                case(selection)
+                                    8'd1: NS = GAMER;
+                                    8'd2: NS = PRESSURE;
+                                    8'd3: NS = ZERO_DAYS;
+                                    8'd4: NS = ZERO_DAYS;
+                                    default: NS = confirmInput;
+                                endcase
 						  end
 						  PRESSURE:
 						  begin
-						      if (selection == 8'd1)
-									NS = CRUMBLE;
-								if (selection == 8'd2)
-									NS = SURPRISE;
-								if (selection == 8'd3)
-									NS = PRESSURE;
-								if (selection == 8'd4)
-									NS = PRESSURE;
+                                case(selection)
+                                    8'd1: NS = CRUMBLE;
+                                    8'd2: NS = SURPRISE;
+                                    8'd3: NS = PRESSURE;
+                                    8'd4: NS = PRESSURE;
+                                    default: NS = confirmInput;
+                                endcase
 						  end
 						  SURPRISE:
 						  begin
@@ -403,7 +392,10 @@ end
 always@(posedge clk or negedge rst)
 begin
     if (rst == 1'b0)
+	 begin
         frame <= 1344'b011000000001000001011000001000011100001100000010001111111000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001100110000000011100001000001101100011000110000001110001010010001100010010000010000001001000110100010110001101000110000111100100010000100001001000100101000110000000000011010011000100011000000010010100001001100100110001110000110100100110001110100011000000100001110000110100100110001000000110100101000000100011111010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000110100011010001101000101;
+        LS <= START;
+	 end
     else
 	 begin
         case(S)
@@ -531,35 +523,43 @@ begin
     end
 end
 
-always@(*)
+always@(posedge clk or negedge rst)
 begin
+    if (rst == 1'b0)
+    begin
+        userInput <= 1'b0;
+        selection <= 1'b0;
+    end
+    else
+    begin
     case(choice)
     4'b1110:
     begin
-        userInput = 1'b1;
-        selection = 8'd1;
+        userInput <= 1'b1;
+        selection <= 8'd1;
     end
     4'b1101:
     begin
-        userInput = 1'b1;
-        selection = 8'd2;
+        userInput <= 1'b1;
+        selection <= 8'd2;
     end
     4'b1011:
     begin
-        userInput = 1'b1;
-        selection = 8'd3;
+        userInput <= 1'b1;
+        selection <= 8'd3;
     end
     4'b0111:
     begin
-        userInput = 1'b1;
-        selection = 8'd4;
+        userInput <= 1'b1;
+        selection <= 8'd4;
     end
     default:
     begin
-        userInput = 1'b0;
-        // selection = 8'd0;
+        userInput <= 1'b0;
+        //selection = 8'd0;
     end
     endcase
+    end
 end
 
 endmodule
