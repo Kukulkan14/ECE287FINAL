@@ -4,6 +4,56 @@ This text-based choose your own adventure game was created by Michael Brown and 
 ## Control
 - Switch 17 is our reset signal and resets the system when it is in the off position.
 - The push button keys allow the user to make an input. The inputs are four to one from left to right.
+## Game States
+Within the game are 24 different game states plus a state for confirming user input. The confirm input state was made to prevent the user from flying through the game if they hold the button for too long. The game states are a mix of option screens, continue screens, and ending screens. The 24 screens are alphabetically as follows.
+### ALIVE
+An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a win for the user as they pass the exam with an A-.
+### ALT_NOW
+An option screen. The user is presented with four options. If buttons 1 or 3 are pressed, "PRINT" will be displayed. If buttons 2 or 4 are pressed, "NO_PRINT" will be displayed.
+### CRUMBLE
+An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a win for the user as they pass the exam with a D+.
+### DEAD
+An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a win for the user as they pass the exam with an A.
+### EXAM
+An option screen. This is the official start of the game. The user is presented with three options. If button 1 is pressed, "NOW" will be displayed. If button 2 is pressed, "TWO_DAYS" will be displayed. If button 3 is pressed, "NEVER" will be displayed. When button 4 is pressed, there will be no change to the display.
+### FIRE
+An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a win for the user as they pass the exam with an A+.
+### FOOD
+An option screen. The user is presented with four options. If buttons 1 or 3 are pressed, "SINK" will be displayed. If buttons 2 or 4 are pressed, "PUT_OUT" will be displayed.
+### GAMER
+An ending screen. The user will have to flip the reset switch if they want to play again. This ending is up to the user for interpretation as they fail the exam but pass at life with an F+.
+### GIVE_UP
+An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a lose for the user as they fail the exam with an F.
+### NEVER
+An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a lose for the user as they fail the exam with an F.
+### NO_FOOD
+An ending screen. The user will have to flip the reset switch if they want to play again. This ending is considered a win for the user as they barely pass the exam with a D-.
+### NO_PRINT
+An option screen. The user is presented with four options. If buttons 1 or 3 are pressed, "DEAD" will be displayed. If buttons 2 or 4 are pressed, "ALIVE" will be displayed.
+### NOW
+A continue screen. When any button is pressed, "NOW_2" will be displayed.
+### NOW_2
+An option screen. The user is presented with four options. If buttons 1 or 3 are pressed, "NO_PRINT" will be displayed. If buttons 2 or 4 are pressed, "PRINT" will be displayed.
+### ONE_DAY
+An option screen. The user is presented with two options. If button 1 is pressed, "ZERO_DAYS" will be displayed. If button 2 is pressed, "NOW" will be displayed. If buttons 3 or 4 are pressed, there will be no change to the display.
+### PRESSURE
+An option screen. The user is presented with two options. If button 1 is pressed, "CRUMBLE" will be displayed. If button 2 is pressed, "SURPRISE" will be displayed. If buttons 3 or 4 are pressed, there will be no change to the display.
+### PRINT
+An option screen. The user is presented with four options. If buttons 1 or 3 are pressed, "FOOD" will be displayed. If buttons 2 or 4 are pressed, "NO_FOOD" will be displayed.
+### PUT_OUT
+An option screen. The user is presented with two options. If button 1 is pressed, "ALT_NOW" will be displayed. If button 2 is pressed, "GIVE_UP" will be displayed. If buttons 3 or 4 are pressed, there will be no change to the display.
+### SINK
+A continue screen. When any button is pressed, "FIRE" will be displayed.
+### START
+A continue screen. The first screen of the game. It informs the user of the symbol used to indicate a continue screen. When the user presses any button, "START_2" will be displayed.
+### START_2
+A continue screen. This screen is the second part of the starting screens and informs the user of the correlation between the buttons on the DE2-115 board and the options presented. When the user presses any button, "EXAM" will be displayed.
+### SURPRISE
+An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a win for the user as they pass the exam with a B+.
+### TWO_DAYS
+An option screen. The user is presented with two options. If button 1 is pressed, "ONE_DAY" will be displayed. If button 2 is pressed, "NOW" will be displayed. If buttons 3 or 4 are pressed, there will be no change to the display.
+### ZERO_DAYS
+An option screen. The user is presented with two options. If button 1 is pressed, "GAMER" will be displayed. If button 2 is pressed, "PRESSURE" will be displayed. If buttons 3 or 4 are pressed, there will be no change to the display.
 ## VGA
 ### VGA States
 NOTE: All states transition after one clock cycle in the order listed unless otherwise noted.
