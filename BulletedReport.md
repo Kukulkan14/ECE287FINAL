@@ -7,12 +7,23 @@ This text-based choose your own adventure game was created by Michael Brown and 
 ## Game States
 Within the game are 24 different game states plus a state for confirming user input. The confirm input state was made to prevent the user from flying through the game if they hold the button for too long. The game states are a mix of option screens, continue screens, and ending screens. The 24 screens are alphabetically as follows.
 ### ALIVE
-An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a win for the user as they pass the exam with an A-.
+- Your iPad is alive. You fly through the exam thinking how easy it is. While you are right, more time would have been better.
+  - You passed! A-
+- An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a win for the user as they pass the exam with an A-.
 ### ALT_NOW
-An option screen. The user is presented with four options. If buttons 1 or 3 are pressed, "PRINT" will be displayed. If buttons 2 or 4 are pressed, "NO_PRINT" will be displayed.
+- You go to get a new exam. As you do, you see your printer. Do you print another copy?
+  - 1 Yes, I learned nothing!
+  - 2 No, not again
+  - 3 Yes, that was fun!
+  - 4 No, go digital
+- An option screen. The user is presented with four options. If buttons 1 or 3 are pressed, "PRINT" will be displayed. If buttons 2 or 4 are pressed, "NO_PRINT" will be displayed.
 ### CRUMBLE
-An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a win for the user as they pass the exam with a D+.
+- Despite what you think, you crumble under pressure. It could have been worse though. Maybe start sooner next time.
+  - You passed! D+
+- An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a win for the user as they pass the exam with a D+.
 ### DEAD
+- Your iPad is dead. You wait for it to charge and then start. The extra time benefitted you.
+  - You passed! A
 - An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a win for the user as they pass the exam with an A.
 ### EXAM
 - You are playing counterstrike 2 when you receive an Email from Dr. Jamieson. It is the 287 exam!
@@ -21,18 +32,38 @@ An ending screen. The user will have to flip the reset switch if they want to pl
   - 3 Do it never
 - An option screen. This is the official start of the game. The user is presented with three options. If button 1 is pressed, "NOW" will be displayed. If button 2 is pressed, "TWO_DAYS" will be displayed. If button 3 is pressed, "NEVER" will be displayed. When button 4 is pressed, there will be no change to the display.
 ### FIRE
+- The fire travels across the very flammable grass. The university has no chance. You immediately graduate with a degree in engineering.
+  - You passed! A+
 - An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a win for the user as they pass the exam with an A+.
 ### FOOD
+- You go to make food, but accidentally set the exam on fire! What do you do?
+  - 1 Panic!
+  - 2 Stay calm!
+  - 3 Throw the exam in the sink!
+  - 4 Put it out!
 - An option screen. The user is presented with four options. If buttons 1 or 3 are pressed, "SINK" will be displayed. If buttons 2 or 4 are pressed, "PUT_OUT" will be displayed.
 ### GAMER
+- You never took the exam, but became a professional CS2 player with all the free time you had.
+  - You failed the exam, but passed at life. F+
 - An ending screen. The user will have to flip the reset switch if they want to play again. This ending is up to the user for interpretation as they fail the exam but pass at life with an F+.
 ### GIVE_UP
+- You think you made a good effort after almost buring your kitchen down. Dr. Jamieson does not agree.
+  - You failed. F
 - An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a lose for the user as they fail the exam with an F.
 ### NEVER
+- You never take the exam.
+  - You failed. F
 - An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a lose for the user as they fail the exam with an F.
 ### NO_FOOD
+- You ignore your hunger and take the exam on an empty stomach. As Snickers would put it, you get a little stupid when you're hungry.
+  - You barely pass! D-
 - An ending screen. The user will have to flip the reset switch if they want to play again. This ending is considered a win for the user as they barely pass the exam with a D-.
 ### NO_PRINT
+- You go digital with your exam. You get your iPad, but did you charge it?
+  - 1 Of course!
+  - 2 No, I always forget
+  - 3 No, it's dead
+  - 4 It should be charged
 - An option screen. The user is presented with four options. If buttons 1 or 3 are pressed, "DEAD" will be displayed. If buttons 2 or 4 are pressed, "ALIVE" will be displayed.
 ### NOW
 - You decide to be responsible and start the exam. As you load the file, you see your printer. It has been a while since it's last use.
@@ -45,14 +76,29 @@ An ending screen. The user will have to flip the reset switch if they want to pl
   - 4 Yes, kill some trees!
 - An option screen. The user is presented with four options. If buttons 1 or 3 are pressed, "NO_PRINT" will be displayed. If buttons 2 or 4 are pressed, "PRINT" will be displayed.
 ### ONE_DAY
+- You ignore the exam for a day. There is now 1 day remaining. What do you do?
+  - 1 Do it later
+  - 2 Do it now
 - An option screen. The user is presented with two options. If button 1 is pressed, "ZERO_DAYS" will be displayed. If button 2 is pressed, "NOW" will be displayed. If buttons 3 or 4 are pressed, there will be no change to the display.
 ### PRESSURE
+- You go to start the exam, but can't remember if you work well under pressure. Do you?
+  - 1 Hold my beer
+  - 2 One way to find out
 - An option screen. The user is presented with two options. If button 1 is pressed, "CRUMBLE" will be displayed. If button 2 is pressed, "SURPRISE" will be displayed. If buttons 3 or 4 are pressed, there will be no change to the display.
 ### PRINT
+- You print out the exam, but are soon reminded of your hunger. Do you make food?
+  - 1 Yes, with cheese.
+  - 2 No, skip food
+  - 3 Yes, without cheese
+  - 4 No time!
 - An option screen. The user is presented with four options. If buttons 1 or 3 are pressed, "FOOD" will be displayed. If buttons 2 or 4 are pressed, "NO_FOOD" will be displayed.
 ### PUT_OUT
+- You grab the extinguisher and put out the fire. You need a new exam, but can't help but question if it's worth it.
+  - 1 Get new exam
+  - 2 Not worth it
 - An option screen. The user is presented with two options. If button 1 is pressed, "ALT_NOW" will be displayed. If button 2 is pressed, "GIVE_UP" will be displayed. If buttons 3 or 4 are pressed, there will be no change to the display.
 ### SINK
+- You throw the exam in the sink thinking it will land in water. You are wrong. It lands in a pot of hot oil instead. Your kitchen goes up in flames and the fire quickly spreads.
 - A continue screen. When any button is pressed, "FIRE" will be displayed.
 ### START
 - Welcome! When you see ^ press any button to continue.
@@ -61,10 +107,18 @@ An ending screen. The user will have to flip the reset switch if they want to pl
 - Use the buttons on the board to make your selection. The order of the buttons is as follows from left to right 4 3 2 1
 - A continue screen. This screen is the second part of the starting screens and informs the user of the correlation between the buttons on the DE2-115 board and the options presented. When the user presses any button, "EXAM" will be displayed.
 ### SURPRISE
+- You do work well under pressure! You get the whole thing done with 2 minutes to spare!
+  - You passed! B+
 - An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a win for the user as they pass the exam with a B+.
 ### TWO_DAYS
+- You ignore the exam for a day. There are now 2 days remaining. What do you do?
+  - 1 Do it later
+  - 2 Do it now
 - An option screen. The user is presented with two options. If button 1 is pressed, "ONE_DAY" will be displayed. If button 2 is pressed, "NOW" will be displayed. If buttons 3 or 4 are pressed, there will be no change to the display.
 ### ZERO_DAYS
+- You ignore the exam for a day. There are now 0 days remaining. What do you do?
+  - 1 Do it later
+  - 2 Do it now
 - An option screen. The user is presented with two options. If button 1 is pressed, "GAMER" will be displayed. If button 2 is pressed, "PRESSURE" will be displayed. If buttons 3 or 4 are pressed, there will be no change to the display.
 ## VGA
 ### VGA States
