@@ -1,5 +1,5 @@
 # Introduction
-This text-based choose your own adventure game was created by Michael Brown and Carl Porter, III on December 2nd, 2023. The project was created to entertain Dr. Jamieson and our fellow students as the game places the user in the shoes of a student taking an ECE 287 exam. The game is not serious and involves the user succeeding or failing in different comical ways. There are twenty four game states with nine endings. We greatly enjoyed creating this game and hope that everyone that plays it enjoys it.
+This text-based, choose your own adventure game was created by Michael Brown and Carl Porter, III on December 2nd, 2023. The project was created to entertain Dr. Jamieson and our fellow students as the game places the user in the shoes of a student taking an ECE 287 exam. The game is not serious and involves the user succeeding or failing in different comical ways. There are twenty four game states with nine endings. We greatly enjoyed creating this game and hope that everyone that plays it enjoys it.
 # Functionality
 ## Control
 - Switch 17 is our reset signal and resets the system when it is in the off position.
