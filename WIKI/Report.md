@@ -5,7 +5,7 @@ This text-based, choose-your-own-adventure game was created by Michael Brown and
 - Switch 17 is our reset signal and resets the system when it is in the off position.
 - The push button keys allow the user to make an input. The inputs are four to one from left to right.
 ## Game States
-Within the game are 24 different game states plus a state for confirming user input. The confirm input state was made to prevent the user from flying through the game if they hold the button for too long. The game states are a mix of option screens, continue screens, and ending screens. The 24 screens are alphabetically as follows.
+Within the game are 24 different game states plus a state for confirming user input. The confirm input state was made to ensure only one input is registered at a time. The game states are a mix of option screens, continue screens, and ending screens. The 24 screens are alphabetically as follows.
 ### ALIVE
 - Your iPad is alive. You fly through the exam thinking how easy it is. While you are right, more time would have been better.
   - You passed! A-
