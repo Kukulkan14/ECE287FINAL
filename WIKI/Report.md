@@ -49,7 +49,7 @@ Within the game are 24 different game states plus a state for confirming user in
 ### GIVE_UP
 - You think you made a good effort after almost burning your kitchen down. Dr. Jamieson does not agree.
   - You failed. F
-- An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a lose for the user as they fail the exam with an F.
+- An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a loss for the user as they fail the exam with an F.
 ### NEVER
 - You never take the exam.
   - You failed. F
