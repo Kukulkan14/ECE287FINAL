@@ -53,7 +53,7 @@ Within the game are 24 different game states plus a state for confirming user in
 ### NEVER
 - You never take the exam.
   - You failed. F
-- An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a lose for the user as they fail the exam with an F.
+- An ending screen. The user will have to flip the reset switch if they want to play again. This ending is a loss for the user as they fail the exam with an F.
 ### NO_FOOD
 - You ignore your hunger and take the exam on an empty stomach. As Snickers would put it, you get a little stupid when you're hungry.
   - You barely pass! D-
