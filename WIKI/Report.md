@@ -180,6 +180,6 @@ https://youtu.be/OPdQtO4UesQ
 - BinaryCharacters.txt is a file containing all of the binary data to draw each character in our font.
 - Letters.xlsx contains all of the characters in the font as drawn by Carl.
 - Mif.java is the java program written by Carl to generate a .mif file containing all of the character drawing data to be stored in the CharacterArray.v memory module.
-- ProjectDemo.MOV is the same demo shown at the YouTube link. It is provided to provide a demonstration if the YouTube link has any issues.
+- ProjectDemo.MOV is the same demo shown at the YouTube link. It is provided as a demonstration if the YouTube link has any issues.
 - char.txt contains all of the binary drawing data for our font without headings.
 - characters.txt is the .mif file Carl generated using Mif.java.
