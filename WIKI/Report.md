@@ -160,8 +160,8 @@ Dr. Peter Jamieson provided the vga_driver_memory_double_buf.v module and subsid
 # Media
 ![ExampleFrame](./Images/ExampleFrame.jpg)
 - An image of the first screen displayed by the game. The text data is hardcoded into the frame variable as 192 7-bit addresses in the START state of the game.v module. Carl encoded the formatting by placing spaces to ensure the text wrapped correctly. I coded a java program that converts a string input to a series of addresses to be placed in the frame variable to assist with this. 
-![ExampleFrame](WIKI/Images/EncodingProcess1.png)
+![ExampleFrame](./Images/EncodingProcess1.png)
 - An image of Carl's formatting for the first screen displayed by the game. The asterisks represent spaces to ensure proper wrapping, and the characters in the first line helped Carl visualize the length of each line of text.
-![ExampleFrame](WIKI/Images/EncodingProcess2.png)
+![ExampleFrame](./Images/EncodingProcess2.png)
 - An image of Carl's formatting and its binary representation that is assigned to the frame variable in the game.v module in the START state.
 https://youtu.be/OPdQtO4UesQ
