@@ -157,3 +157,5 @@ The VGA buffer reading logic is as follows:
 - character_buf_mem_address in the vga_driver_memory_double_buf.v module updates current_character with the data to draw each character.
 # Citations
 Dr. Peter Jamieson provided the vga_driver_memory_double_buf.v module and subsidiary files that were modified to work with our project.
+# Media
+![Example Frame](ECE287Final/WIKI/Images/Example Frame.jpg)
