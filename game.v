@@ -5,6 +5,7 @@ reg[4:0]NS;
 reg[4:0]LS;
 reg[7:0]selection;
 
+// Block to reset the FSM.
 always@(posedge clk or negedge rst)
 begin
     if (rst == 1'b0)
@@ -43,6 +44,7 @@ parameter START = 5'd0,
 			 NEVER = 5'd23,
           confirmInput = 5'd24;
 
+// Block to determine NS.
 always@(*)
 begin
     case(S)
@@ -214,6 +216,8 @@ begin
             else    
                 NS = NEVER;
         end
+        /* Ensure only one input is registered at a time by switching states after the input is released.
+        LS is used to determine the last state, and thus, what state to transition to. */
         confirmInput:
         begin
             if (userInput == 1'b0)
@@ -389,6 +393,7 @@ begin
     endcase
 end
 
+// This block assigns the frame variable the hardcoded data for each frame.
 always@(posedge clk or negedge rst)
 begin
     if (rst == 1'b0)
@@ -523,6 +528,7 @@ begin
     end
 end
 
+// This block determines the user's input.
 always@(posedge clk or negedge rst)
 begin
     if (rst == 1'b0)
@@ -556,7 +562,6 @@ begin
     default:
     begin
         userInput <= 1'b0;
-        //selection = 8'd0;
     end
     endcase
     end

@@ -251,6 +251,8 @@ module FinalProject(// Clock Inputs
   assign UART_TXD   = 1'b0;
   assign UART_CTS   = 1'b0;
 // DONE STANDARD PORT DECLARATION ABOVE
+
+    // frameData connects the frameData variable in the game module to the vga_driver_memory_double_buf module.
     wire [1343:0] frameData;
     vga_driver_memory_double_buf vga_output(CLOCK_50, CLOCK2_50, CLOCK3_50, SMA_CLKOUT, SMA_CLKIN, SW, frameData, VGA_CLK, VGA_HS, VGA_VS, VGA_BLANK_N, VGA_SYNC_N, VGA_R, VGA_G, VGA_B);
     game gameEngine(CLOCK_50, SW[17], KEY, frameData);
