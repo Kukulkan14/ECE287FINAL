@@ -162,10 +162,24 @@ Dr. Peter Jamieson provided the vga_driver_memory_double_buf.v module and subsid
 - An image of the first screen displayed by the game. The text data is hardcoded into the frame variable as 192 7-bit addresses in the START state of the game.v module. Carl encoded the formatting by placing spaces to ensure the text wrapped correctly. I coded a java program that converts a string input to a series of addresses to be placed in the frame variable to assist with this.
 
 ![ExampleFrame](./Images/EncodingProcess1.png)
-- An image of Carl's formatting for the first screen displayed by the game. The asterisks represent spaces to ensure proper wrapping, and the characters in the first line helped Carl visualize the length of each line of text.
+- An image of Carl's formatting for the first screen displayed by the game. The asterisks represent spaces to ensure proper wrapping, and the characters in the first line helped Carl visualize the length of each line of text. Finally, the dollar sign was used to represent the triangular symbol we used to indicate continue.
 
 ![ExampleFrame](./Images/EncodingProcess2.png)
 - An image of Carl's formatting and its binary representation that is assigned to the frame variable in the game.v module in the START state.
+  
+![ExampleFrame](./Images/FontExample.png)
+- An image of lowercase a in our font designed by Carl. Carl used eight by eight boxes on excel to draw each character which was placed into ten by ten boxes on the screen. This is accomplished through encoding the drawing data for each ten by ten box into the current_character variable.
+
+![ExampleFrame](./Images/FontExample.png)
+- An image showing the game state tree that shows the flow of all of the paths in the game.
 
 https://youtu.be/OPdQtO4UesQ
 - A link to a video demonstrating a playthrough of the game from the tutorial screen to an ending.
+# Files
+- StringEncoder.java is Michael's java file to assist in converting strings to addresses corresponding to the data stored in the CharacterArray.v memory module.
+- BinaryCharacters.txt is a file containing all of the binary data to draw each character in our font.
+- Letters.xlsx contains all of the characters in the font as drawn by Carl.
+- Mif.java is the java program written by Carl to generate a .mif file containing all of the character drawing data to be stored in the CharacterArray.v memory module.
+- ProjectDemo.MOV is the same demo shown at the YouTube link. It is provided to provide a demonstration if the YouTube link has any issues.
+- char.txt contains all of the binary drawing data for our font without headings.
+- characters.txt is the .mif file Carl generated using Mif.java.
