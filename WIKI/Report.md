@@ -158,4 +158,4 @@ The VGA buffer reading logic is as follows:
 # Citations
 Dr. Peter Jamieson provided the vga_driver_memory_double_buf.v module and subsidiary files that were modified to work with our project.
 # Media
-![ExampleFrame](ECE287Final/WIKI/Images/ExampleFrame.jpg)
+![ExampleFrame](./Images/ExampleFrame.jpg)
