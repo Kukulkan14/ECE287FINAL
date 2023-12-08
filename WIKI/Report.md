@@ -168,7 +168,7 @@ Dr. Peter Jamieson provided the vga_driver_memory_double_buf.v module and subsid
 - An image of Carl's formatting and its binary representation that is assigned to the frame variable in the game.v module in the START state.
   
 ![ExampleFrame](./Images/FontExample.png)
-- An image of lowercase a in our font designed by Carl. Carl used eight by eight boxes in excel to draw each character which was placed into ten by ten boxes on the screen. This is accomplished through encoding the drawing data for each ten by ten box into the current_character variable.
+- An image of lowercase a in our font designed by Carl. Carl used eight by eight boxes in Microsoft Excel to draw each character which was placed into ten by ten boxes on the screen. This is accomplished through encoding the drawing data for each ten by ten box into the current_character variable.
 
 ![ExampleFrame](./Game_State_Planning_Tree.png)
 - An image showing the game state tree that shows the flow of all of the paths in the game.
