@@ -170,7 +170,7 @@ Dr. Peter Jamieson provided the vga_driver_memory_double_buf.v module and subsid
 ![ExampleFrame](./Images/FontExample.png)
 - An image of lowercase a in our font designed by Carl. Carl used eight by eight boxes on excel to draw each character which was placed into ten by ten boxes on the screen. This is accomplished through encoding the drawing data for each ten by ten box into the current_character variable.
 
-![ExampleFrame](./Images/FontExample.png)
+![ExampleFrame](./Game_State_Planning_Tree.png)
 - An image showing the game state tree that shows the flow of all of the paths in the game.
 
 https://youtu.be/OPdQtO4UesQ
