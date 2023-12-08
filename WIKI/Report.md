@@ -159,4 +159,4 @@ The VGA buffer reading logic is as follows:
 Dr. Peter Jamieson provided the vga_driver_memory_double_buf.v module and subsidiary files that were modified to work with our project.
 # Media
 ![ExampleFrame](./Images/ExampleFrame.jpg)
-An image of the first screen displayed by the game. The text data is hardcoded into the frame variable as 192 7-bit addresses in the START state of the game.v module. Carl encoded the formatting by placing spaces to ensure the text wrapped correctly. I coded a java program that converts a string input to a series of addresses to be placed in the frame variable. 
+An image of the first screen displayed by the game. The text data is hardcoded into the frame variable as 192 7-bit addresses in the START state of the game.v module. Carl encoded the formatting by placing spaces to ensure the text wrapped correctly. I coded a java program that converts a string input to a series of addresses to be placed in the frame variable to assist with this. 
