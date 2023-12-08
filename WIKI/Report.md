@@ -166,4 +166,6 @@ Dr. Peter Jamieson provided the vga_driver_memory_double_buf.v module and subsid
 
 ![ExampleFrame](./Images/EncodingProcess2.png)
 - An image of Carl's formatting and its binary representation that is assigned to the frame variable in the game.v module in the START state.
+
 https://youtu.be/OPdQtO4UesQ
+- A link to a video demonstrating a playthrough of the game from the tutorial screen to an ending.
