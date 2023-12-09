@@ -344,7 +344,8 @@ begin
                     wr_id <= MEM_M0_READ_M1_WRITE;
 
 
-                /*The read structure. Please see the documentation for more information.*/
+                /*The read structure. Please see the documentation for more information.
+		This structure is included in multiple states to ensure data is read continously.*/
                 if (y < VGA_HEIGHT && x < VGA_WIDTH)
                 begin
                 case(readCounter)
